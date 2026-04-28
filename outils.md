@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toolkit Mission – Université Hassan 1er</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:     #1a1a2e;
+    --orange:  #E8622A;
+    --orange2: #c94e1e;
+    --blue:    #2E4057;
+    --blue2:   #4A6FA5;
+    --green:   #27AE60;
+    --purple:  #6C3483;
+    --teal:    #1A5276;
+    --red:     #C0392B;
+    --cream:   #FAF7F2;
+    --mid:     #F0EBE3;
+    --border:  #DDD5C8;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── COVER ───────────────────────────────────── */
+  .cover {
+    background: var(--blue);
+    color: white;
+    padding: 56px 60px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content:'';
+    position:absolute; top:-60px; right:-60px;
+    width:320px; height:320px;
+    border-radius:50%;
+    background: rgba(232,98,42,0.18);
+  }
+  .cover::after {
+    content:'';
+    position:absolute; bottom:-40px; left:40px;
+    width:200px; height:200px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .cover-label {
+    font-size:11px; letter-spacing:3px; text-transform:uppercase;
+    color: var(--orange); font-weight:600; margin-bottom:16px;
+  }
+  .cover h1 {
+    font-family:'Playfair Display', serif;
+    font-size:36px; font-weight:900; line-height:1.15;
+    margin-bottom:10px;
+  }
+  .cover-sub {
+    font-size:13px; color:rgba(255,255,255,0.7); max-width:560px;
+    margin-bottom:32px;
+  }
+  .cover-missions {
+    display:flex; gap:10px; flex-wrap:wrap;
+  }
+  .cover-pill {
+    padding:5px 14px; border-radius:20px; font-size:11px; font-weight:600;
+    letter-spacing:.5px;
+  }
+
+  /* ── LAYOUT ──────────────────────────────────── */
+  .page { padding: 40px 60px; }
+
+  /* ── SECTION HEADERS ─────────────────────────── */
+  .section-header {
+    display:flex; align-items:center; gap:14px;
+    margin: 36px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-icon {
+    width:34px; height:34px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+  .section-header h2 {
+    font-family:'Playfair Display', serif;
+    font-size:20px; font-weight:700;
+  }
+  .section-header .mission-tag {
+    margin-left:auto; font-size:10px; font-weight:600;
+    letter-spacing:1px; text-transform:uppercase;
+    padding:3px 10px; border-radius:12px; white-space:nowrap;
+  }
+
+  /* ── TOOL CARDS ───────────────────────────────── */
+  .tools-grid {
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;
+    margin-bottom: 10px;
+  }
+  .tool-card {
+    background:white; border-radius:10px;
+    border: 1px solid var(--border);
+    padding:16px 18px;
+    transition: box-shadow .2s;
+    page-break-inside: avoid;
+  }
+  .tool-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+  .tool-card-header {
+    display:flex; align-items:center; gap:10px; margin-bottom:8px;
+  }
+  .tool-dot {
+    width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  }
+  .tool-card h3 {
+    font-size:12px; font-weight:600; line-height:1.3;
+  }
+  .tool-card p {
+    font-size:11px; color:#555; line-height:1.5;
+  }
+  .tool-type {
+    display:inline-block; margin-top:8px;
+    font-size:9px; font-weight:700; letter-spacing:1px;
+    text-transform:uppercase; padding:2px 8px;
+    border-radius:4px;
+  }
+
+  /* ── TECHNIQUES TABLE ────────────────────────── */
+  .tech-table { width:100%; border-collapse:collapse; margin-bottom:10px; }
+  .tech-table th {
+    background: var(--blue); color:white;
+    font-size:10px; font-weight:600; letter-spacing:.8px;
+    text-transform:uppercase; padding:8px 12px; text-align:left;
+  }
+  .tech-table td {
+    padding:8px 12px; font-size:11.5px;
+    border-bottom: 1px solid var(--border);
+    vertical-align:top;
+  }
+  .tech-table tr:nth-child(even) td { background:#faf8f5; }
+  .badge {
+    display:inline-block; padding:2px 8px; border-radius:4px;
+    font-size:9px; font-weight:700; letter-spacing:.8px;
+    text-transform:uppercase; white-space:nowrap;
+  }
+
+  /* ── NORMES BOX ──────────────────────────────── */
+  .norms-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .norm-card {
+    background:white; border-radius:10px;
+    border-left:4px solid; padding:16px 18px;
+  }
+  .norm-card h4 { font-size:13px; font-weight:700; margin-bottom:4px; }
+  .norm-card p  { font-size:11px; color:#555; }
+
+  /* ── LIVRABLES ───────────────────────────────── */
+  .livrable-list { columns:2; gap:20px; }
+  .livrable-item {
+    display:flex; gap:8px; margin-bottom:8px;
+    break-inside:avoid; align-items:flex-start;
+  }
+  .livrable-num {
+    min-width:28px; height:20px; border-radius:5px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:9px; font-weight:700; flex-shrink:0;
+    margin-top:2px;
+  }
+  .livrable-item span { font-size:11px; line-height:1.4; }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  .footer {
+    background:var(--blue); color:rgba(255,255,255,0.6);
+    text-align:center; padding:18px 60px;
+    font-size:10px; letter-spacing:.5px;
+    margin-top:40px;
+  }
+  .footer strong { color:white; }
+
+  /* ── PRINT ───────────────────────────────────── */
+  @media print {
+    body { font-size:11px; }
+    .cover { padding:40px; }
+    .page { padding:30px 40px; }
+    .tools-grid { grid-template-columns: repeat(3,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER
+══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-label">Document de Mission · Université Hassan 1<sup>er</sup> – Settat</div>
+  <h1>Toolkit de la Mission<br>d'Audit & de Gouvernance</h1>
+  <p class="cover-sub">
+    Outils, techniques, normes et méthodes mobilisés dans le cadre de la réalisation de la mission globale
+    comprenant 5 composantes pour un délai total de 133 jours calendaires.
+  </p>
+  <div class="cover-missions">
+    <span class="cover-pill" style="background:rgba(232,98,42,.25);color:#ffb38a;">M1 · Cartographie des Risques</span>
+    <span class="cover-pill" style="background:rgba(39,174,96,.22);color:#7dffb5;">M2 · Audit Opérationnel</span>
+    <span class="cover-pill" style="background:rgba(108,52,131,.25);color:#d5a8f0;">M3 · Manuel de Procédures</span>
+    <span class="cover-pill" style="background:rgba(26,82,118,.35);color:#90caf9;">M4 · Accompagnement</span>
+    <span class="cover-pill" style="background:rgba(192,57,43,.25);color:#ff8a80;">M5 · Tableaux de Bord</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════════ -->
+<div class="page">
+
+<!-- ── M1: OUTILS CARTOGRAPHIE DES RISQUES ── -->
+<div class="section-header">
+  <div class="section-icon" style="background:#FEE8DC;">🗺️</div>
+  <h2>Mission 1 · Identification & Cartographie des Risques</h2>
+  <span class="mission-tag" style="background:#FEE8DC;color:#E8622A;">21 jours</span>
+</div>
+
+<div class="tools-grid">
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#E8622A;"></div>
+      <h3>ISO 31000</h3>
+    </div>
+    <p>Norme internationale de management du risque. Fournit les principes, le cadre et le processus structuré d'identification, d'évaluation et de traitement des risques.</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Référentiel normatif</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#E8622A;"></div>
+      <h3>COSO ERM</h3>
+    </div>
+    <p>Cadre Enterprise Risk Management – Integrated Framework. Structuration des risques par objectifs stratégiques, opérationnels, financiers et de conformité.</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Référentiel normatif</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#c94e1e;"></div>
+      <h3>Matrice des Risques (Impact × Probabilité)</h3>
+    </div>
+    <p>Représentation visuelle positionnant chaque risque selon sa probabilité d'occurrence et la gravité de son impact. Permet la hiérarchisation (faible → critique).</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Outil d'analyse</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#c94e1e;"></div>
+      <h3>Scoring Risques (Risque Brut / Net)</h3>
+    </div>
+    <p>Méthode de notation quantitative : Criticité = Probabilité × Impact. Calcul du risque brut (avant contrôles) et risque net (après application des contrôles existants).</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Méthode de scoring</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#c94e1e;"></div>
+      <h3>Brainstorming Structuré</h3>
+    </div>
+    <p>Séances animées avec les parties prenantes pour identifier de manière exhaustive les risques stratégiques, opérationnels, financiers, SI, juridiques et de réputation.</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Technique participative</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#c94e1e;"></div>
+      <h3>Ateliers Participatifs (Workshops)</h3>
+    </div>
+    <p>Sessions de travail impliquant direction, personnel administratif, enseignants et partenaires pour une identification et une évaluation collectives des risques.</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Technique participative</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#c94e1e;"></div>
+      <h3>Grilles d'Entretiens Semi-Directifs</h3>
+    </div>
+    <p>Questionnaires structurés pour les entretiens individuels avec les responsables clés. Permettent de recueillir les perceptions terrain des risques par domaine d'activité.</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Outil de collecte</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#c94e1e;"></div>
+      <h3>Analyse Documentaire</h3>
+    </div>
+    <p>Revue des textes réglementaires (décret 2-22-431, dahir 1997), rapports financiers, organigrammes, plans stratégiques et évaluations antérieures de l'UH1.</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Technique de recherche</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#c94e1e;"></div>
+      <h3>Base de Données des Risques (Excel/BDD)</h3>
+    </div>
+    <p>Registre structuré recensant chaque risque : description, catégorie, cause, conséquence, contrôles existants, score de criticité et plan d'action associé (Livrable L2).</p>
+    <span class="tool-type" style="background:#FEE8DC;color:#E8622A;">Outil de documentation</span>
+  </div>
+
+</div>
+
+<!-- ── M2: OUTILS AUDIT OPÉRATIONNEL ── -->
+<div class="section-header">
+  <div class="section-icon" style="background:#D5F5E3;">🔍</div>
+  <h2>Mission 2 · Audit Opérationnel & de Performance</h2>
+  <span class="mission-tag" style="background:#D5F5E3;color:#27AE60;">28 jours</span>
+</div>
+
+<div class="tools-grid">
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Normes IIA (Institute of Internal Auditors)</h3>
+    </div>
+    <p>Cadre de référence international pour l'audit interne. Définit les standards de performance, d'indépendance et de communication des résultats d'audit.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Référentiel normatif</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Plan d'Audit Détaillé</h3>
+    </div>
+    <p>Document de cadrage définissant le périmètre, les objectifs, les critères d'évaluation, les outils mobilisés et le chronogramme des interventions (Livrable L9).</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Outil de planification</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Questionnaires de Contrôle Interne (QCI)</h3>
+    </div>
+    <p>Grilles standardisées d'évaluation du contrôle interne par processus (finances, RH, SI, achats). Permettent d'identifier les forces et faiblesses de chaque dispositif.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Outil d'évaluation</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Tests de Cheminement (Walk-through Tests)</h3>
+    </div>
+    <p>Suivi d'une transaction de bout en bout à travers les systèmes et procédures pour vérifier l'application effective des contrôles et identifier les écarts.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Technique d'audit</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Tests de Conformité & de Performance</h3>
+    </div>
+    <p>Vérification de l'application effective des procédures réglementaires (CCAG-EMO, décret 2-22-431) et évaluation de l'atteinte des objectifs fixés par l'institution.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Technique d'audit</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Observation Directe</h3>
+    </div>
+    <p>Examen sur site des postes de travail et des processus en cours d'exécution. Permet de détecter les écarts entre procédures formalisées et pratiques réelles.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Technique de collecte</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Analyse de Données Quantitatives & Qualitatives</h3>
+    </div>
+    <p>Collecte et traitement de données financières, RH et académiques pour évaluer la performance, identifier les tendances, anomalies et zones de risque.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Technique analytique</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Feuilles de Travail d'Audit</h3>
+    </div>
+    <p>Documentation rigoureuse de chaque constat d'audit, étayée par des preuves tangibles et objectives. Support de la phase contradictoire avec la Présidence.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Outil de documentation</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#27AE60;"></div>
+      <h3>Phase Contradictoire</h3>
+    </div>
+    <p>Procédure de présentation du projet de rapport au comité de pilotage pour discussion, recueil des observations et intégration des amendements pertinents avant finalisation.</p>
+    <span class="tool-type" style="background:#D5F5E3;color:#27AE60;">Procédure qualité</span>
+  </div>
+
+</div>
+
+</div><!-- /page -->
+
+<!-- ══════════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════════ -->
+<div class="page">
+
+<!-- ── M3: MANUEL DE PROCÉDURES ── -->
+<div class="section-header">
+  <div class="section-icon" style="background:#E8DAEF;">📋</div>
+  <h2>Mission 3 · Mise à Jour du Manuel de Procédures</h2>
+  <span class="mission-tag" style="background:#E8DAEF;color:#6C3483;">14 jours</span>
+</div>
+
+<div class="tools-grid">
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#6C3483;"></div>
+      <h3>Cartographie des Processus</h3>
+    </div>
+    <p>Modélisation visuelle détaillée de l'ensemble des processus clés de la Présidence (RH, finances, achats, recherche, scolarité…) avant rédaction des procédures.</p>
+    <span class="tool-type" style="background:#E8DAEF;color:#6C3483;">Outil de modélisation</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#6C3483;"></div>
+      <h3>Logigrammes & Diagrammes de Flux</h3>
+    </div>
+    <p>Représentation graphique étape par étape de chaque procédure, incluant les acteurs, les points de contrôle, les décisions et les documents associés.</p>
+    <span class="tool-type" style="background:#E8DAEF;color:#6C3483;">Outil de modélisation</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#6C3483;"></div>
+      <h3>Benchmark des Bonnes Pratiques</h3>
+    </div>
+    <p>Analyse comparative des manuels de procédures d'institutions universitaires similaires au Maroc et à l'international pour intégrer les meilleures pratiques sectorielles.</p>
+    <span class="tool-type" style="background:#E8DAEF;color:#6C3483;">Technique de recherche</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#6C3483;"></div>
+      <h3>Ateliers de Validation (Co-construction)</h3>
+    </div>
+    <p>Sessions avec responsables de services et utilisateurs clés pour valider l'adéquation, la clarté et l'applicabilité des procédures rédigées avant leur finalisation.</p>
+    <span class="tool-type" style="background:#E8DAEF;color:#6C3483;">Technique participative</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#6C3483;"></div>
+      <h3>Modèles de Documents & Formulaires Types</h3>
+    </div>
+    <p>Élaboration des templates standardisés associés à chaque procédure : formulaires, pièces justificatives, bordereaux, fiches de suivi et supports de validation.</p>
+    <span class="tool-type" style="background:#E8DAEF;color:#6C3483;">Outil de standardisation</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#6C3483;"></div>
+      <h3>Intégration des Principes de Contrôle Interne</h3>
+    </div>
+    <p>Conception des procédures selon les principes COSO : séparation des tâches, double validation, traçabilité, piste d'audit, pour minimiser les risques d'erreurs et de fraudes.</p>
+    <span class="tool-type" style="background:#E8DAEF;color:#6C3483;">Méthode de conception</span>
+  </div>
+
+</div>
+
+<!-- ── M4: ACCOMPAGNEMENT ── -->
+<div class="section-header">
+  <div class="section-icon" style="background:#D6EAF8;">🚀</div>
+  <h2>Mission 4 · Accompagnement à la Mise en Œuvre</h2>
+  <span class="mission-tag" style="background:#D6EAF8;color:#1A5276;">28 jours</span>
+</div>
+
+<div class="tools-grid">
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#1A5276;"></div>
+      <h3>Stratégie de Conduite du Changement</h3>
+    </div>
+    <p>Diagnostic des freins et leviers au changement ; définition d'une stratégie de communication adaptée aux différentes catégories de personnel de la Présidence.</p>
+    <span class="tool-type" style="background:#D6EAF8;color:#1A5276;">Méthode managériale</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#1A5276;"></div>
+      <h3>Plan de Communication & Sensibilisation</h3>
+    </div>
+    <p>Outil structuré précisant les messages clés, les canaux, les cibles et le calendrier de communication interne pour favoriser l'adhésion au nouveau manuel.</p>
+    <span class="tool-type" style="background:#D6EAF8;color:#1A5276;">Outil de communication</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#1A5276;"></div>
+      <h3>Modules de Formation Interactifs</h3>
+    </div>
+    <p>Supports pédagogiques (études de cas, mises en situation, guides utilisateurs) conçus pour chaque profil : personnel de direction, cadres administratifs, agents d'exécution.</p>
+    <span class="tool-type" style="background:#D6EAF8;color:#1A5276;">Outil pédagogique</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#1A5276;"></div>
+      <h3>Indicateurs de Suivi du Déploiement</h3>
+    </div>
+    <p>Tableau de bord opérationnel mesurant le taux d'application des procédures, le niveau d'appropriation par service, les anomalies détectées et les actions correctives.</p>
+    <span class="tool-type" style="background:#D6EAF8;color:#1A5276;">Outil de suivi</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#1A5276;"></div>
+      <h3>Points d'Étape & Comité de Pilotage</h3>
+    </div>
+    <p>Réunions régulières avec le comité de pilotage présidé par un haut responsable pour évaluer l'avancement, identifier les difficultés et décider des actions correctives.</p>
+    <span class="tool-type" style="background:#D6EAF8;color:#1A5276;">Méthode de gouvernance</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#1A5276;"></div>
+      <h3>Bilan Post-Déploiement & Capitalisation</h3>
+    </div>
+    <p>Évaluation de l'appropriation du manuel et de son impact sur le fonctionnement. Formalisation des retours d'expérience et recommandations de pérennisation.</p>
+    <span class="tool-type" style="background:#D6EAF8;color:#1A5276;">Outil d'évaluation</span>
+  </div>
+
+</div>
+
+<!-- ── M5: TABLEAUX DE BORD ── -->
+<div class="section-header">
+  <div class="section-icon" style="background:#FADBD8;">📊</div>
+  <h2>Mission 5 · Conception des Tableaux de Bord de Contrôle de Gestion</h2>
+  <span class="mission-tag" style="background:#FADBD8;color:#C0392B;">42 jours</span>
+</div>
+
+<div class="tools-grid">
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#C0392B;"></div>
+      <h3>Référentiel KPIs SMART</h3>
+    </div>
+    <p>Définition d'indicateurs Spécifiques, Mesurables, Atteignables, Réalistes et Temporellement définis couvrant les dimensions financières, pédagogiques, RH et de recherche.</p>
+    <span class="tool-type" style="background:#FADBD8;color:#C0392B;">Méthode de pilotage</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#C0392B;"></div>
+      <h3>Business Intelligence (BI)</h3>
+    </div>
+    <p>Outils de visualisation de données (Power BI, Tableau ou équivalent) pour la construction de tableaux de bord dynamiques avec drill-down, filtres et navigation intuitive.</p>
+    <span class="tool-type" style="background:#FADBD8;color:#C0392B;">Outil technologique</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#C0392B;"></div>
+      <h3>Processus ETL (Extract-Transform-Load)</h3>
+    </div>
+    <p>Développement des flux d'extraction, transformation et chargement des données pour automatiser l'alimentation des tableaux de bord depuis les SI de la Présidence.</p>
+    <span class="tool-type" style="background:#FADBD8;color:#C0392B;">Outil technologique</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#C0392B;"></div>
+      <h3>Maquettage Fonctionnel (Wireframing)</h3>
+    </div>
+    <p>Conception de prototypes visuels des tableaux de bord par profil utilisateur avant développement. Validation des maquettes par les futurs utilisateurs et le comité de pilotage.</p>
+    <span class="tool-type" style="background:#FADBD8;color:#C0392B;">Méthode de conception</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#C0392B;"></div>
+      <h3>Représentations Graphiques Adaptées</h3>
+    </div>
+    <p>Courbes de tendance, histogrammes, jauges de performance, cartes géographiques et graphiques en cascade pour faciliter l'interprétation et la prise de décision rapide.</p>
+    <span class="tool-type" style="background:#FADBD8;color:#C0392B;">Outil de visualisation</span>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <div class="tool-dot" style="background:#C0392B;"></div>
+      <h3>Tests de Recette & Plan de Maintenance</h3>
+    </div>
+    <p>Tests rigoureux (exactitude des données, fonctionnalités, performance, sécurité des accès) avant déploiement. Documentation technique et plan de maintenance évolutive.</p>
+    <span class="tool-type" style="background:#FADBD8;color:#C0392B;">Procédure qualité</span>
+  </div>
+
+</div>
+
+<!-- ── NORMES & RÉFÉRENTIELS ── -->
+<div class="section-header">
+  <div class="section-icon" style="background:#EAF2FF;">📜</div>
+  <h2>Normes & Référentiels Applicables</h2>
+</div>
+
+<div class="norms-grid">
+  <div class="norm-card" style="border-color:#E8622A;">
+    <h4>ISO 31000 – Management du Risque</h4>
+    <p>Principes et lignes directrices pour l'identification, l'évaluation, le traitement et le suivi des risques. Applicable à toute organisation, adapté au contexte universitaire marocain.</p>
+  </div>
+  <div class="norm-card" style="border-color:#27AE60;">
+    <h4>Normes IIA – Audit Interne International</h4>
+    <p>Standards professionnels pour la conduite de missions d'audit : indépendance, objectivité, compétence, conduite des missions et communication des résultats.</p>
+  </div>
+  <div class="norm-card" style="border-color:#6C3483;">
+    <h4>COSO ERM – Contrôle Interne</h4>
+    <p>Enterprise Risk Management Framework : alignement risques-objectifs stratégiques, identification des événements, évaluation et réponse aux risques, information et communication.</p>
+  </div>
+  <div class="norm-card" style="border-color:#1A5276;">
+    <h4>Décret n° 2-22-431 – Marchés Publics Maroc</h4>
+    <p>Cadre réglementaire national encadrant la passation, l'exécution et le contrôle des marchés publics. Référence obligatoire pour l'ensemble des prestations de la mission.</p>
+  </div>
+  <div class="norm-card" style="border-color:#C0392B;">
+    <h4>CCAG-EMO – Études & Maîtrise d'Œuvre</h4>
+    <p>Cahier des clauses administratives générales applicable aux marchés de services d'études. Régit les modalités d'exécution, de réception et de paiement des prestations.</p>
+  </div>
+  <div class="norm-card" style="border-color:#2E4057;">
+    <h4>Loi 07-75 & Dahir 1997 – Universités Marocaines</h4>
+    <p>Textes fondateurs régissant la création, l'organisation et le fonctionnement des établissements universitaires et des cités universitaires au Royaume du Maroc.</p>
+  </div>
+</div>
+
+<!-- ── LIVRABLES SYNTHÈSE ── -->
+<div class="section-header">
+  <div class="section-icon" style="background:#F0F0F0;">📦</div>
+  <h2>Synthèse des Livrables Attendus (L1 → L32)</h2>
+</div>
+
+<div class="livrable-list">
+
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FEE8DC;color:#E8622A;">L1</div>
+    <span>Rapport de cadrage et de méthodologie</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FEE8DC;color:#E8622A;">L2</div>
+    <span>Base de données des risques identifiés</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FEE8DC;color:#E8622A;">L3</div>
+    <span>Rapport d'évaluation et hiérarchisation des risques</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FEE8DC;color:#E8622A;">L4</div>
+    <span>Matrice des risques (impact × probabilité)</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FEE8DC;color:#E8622A;">L5</div>
+    <span>Rapport mesures de maîtrise & plans d'action</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FEE8DC;color:#E8622A;">L6</div>
+    <span>Rapport final – Mission cartographie des risques</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FEE8DC;color:#E8622A;">L7</div>
+    <span>Présentations et ateliers de restitution</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D5F5E3;color:#27AE60;">L8</div>
+    <span>Compte rendu de la réunion de lancement</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D5F5E3;color:#27AE60;">L9</div>
+    <span>Plan d'audit détaillé</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D5F5E3;color:#27AE60;">L10</div>
+    <span>Note de cadrage globale de la mission</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D5F5E3;color:#27AE60;">L11</div>
+    <span>Projet rapport d'audit (phase contradictoire)</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D5F5E3;color:#27AE60;">L12</div>
+    <span>Rapport d'audit opérationnel & performance final</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D5F5E3;color:#27AE60;">L13</div>
+    <span>Support de restitution des conclusions de l'audit</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#E8DAEF;color:#6C3483;">L14</div>
+    <span>Rapport de diagnostic du manuel existant</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#E8DAEF;color:#6C3483;">L15</div>
+    <span>Cartographie détaillée des processus</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#E8DAEF;color:#6C3483;">L16</div>
+    <span>Projet de manuel de procédures actualisé</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#E8DAEF;color:#6C3483;">L17</div>
+    <span>Manuel de procédures final validé (papier + PDF)</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#E8DAEF;color:#6C3483;">L18</div>
+    <span>Dispositif de gestion & mise à jour du manuel</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D6EAF8;color:#1A5276;">L19</div>
+    <span>Stratégie de conduite du changement & plan de communication</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D6EAF8;color:#1A5276;">L20</div>
+    <span>Plan de formation global du personnel</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D6EAF8;color:#1A5276;">L21</div>
+    <span>Supports pédagogiques des formations</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D6EAF8;color:#1A5276;">L22</div>
+    <span>Rapports de déroulement des sessions de formation</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D6EAF8;color:#1A5276;">L23</div>
+    <span>Rapport de suivi du déploiement du manuel</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#D6EAF8;color:#1A5276;">L24</div>
+    <span>Bilan post-déploiement & capitalisation</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FADBD8;color:#C0392B;">L25</div>
+    <span>Référentiel KPIs validé</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FADBD8;color:#C0392B;">L26</div>
+    <span>Maquettes fonctionnelles des tableaux de bord</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FADBD8;color:#C0392B;">L27</div>
+    <span>Solution technique proposée et justifiée</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FADBD8;color:#C0392B;">L28</div>
+    <span>Tableaux de bord développés, testés et déployés</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#FADBD8;color:#C0392B;">L29</div>
+    <span>Documentation technique complète des TDB</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#EAF2FF;color:#2E4057;">L30</div>
+    <span>Rapports d'avancement périodiques</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#EAF2FF;color:#2E4057;">L31</div>
+    <span>Comptes rendus des réunions du comité de pilotage</span>
+  </div>
+  <div class="livrable-item">
+    <div class="livrable-num" style="background:#EAF2FF;color:#2E4057;">L32</div>
+    <span>Rapport final de mission – synthèse globale</span>
+  </div>
+
+</div>
+
+</div><!-- /page -->
+
+<div class="footer">
+  <strong>Université Hassan 1<sup>er</sup> – Settat</strong> &nbsp;·&nbsp; Mission d'Audit Opérationnel, Cartographie des Risques & Optimisation de la Gouvernance &nbsp;·&nbsp; 133 jours calendaires &nbsp;·&nbsp; 5 missions · 32 livrables
+</div>
+
+</body>
+</html>
